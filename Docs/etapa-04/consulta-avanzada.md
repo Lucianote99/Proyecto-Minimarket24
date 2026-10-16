@@ -8,6 +8,7 @@ Este documento detalla la implementación y el funcionamiento de la consulta de 
 Obtener un listado de aquellos productos cuyas unidades totales vendidas superen el promedio general de ventas de todos los productos registrados en el sistema, considerando exclusivamente las transacciones completadas.
 
 ### Código SQL
+```sql    
     SELECT 
     p.id_producto,
     p.nombre AS nombre_producto,
@@ -37,7 +38,8 @@ HAVING -- Filtro condicional sobre el grupo
     );
 
 ###Explicación Detallada Línea por Línea
-##Bloque 1: Proyección de Columnas (`SELECT`)##
+
+##Bloque 1: Proyección de Columnas (`SELECT`)
 `SELECT`: Define cuáles serán las columnas finales del reporte que devolverá la consulta.
 
 `p.id_producto`: Selecciona la clave primaria de la tabla `producto` (utilizando el alias `p`). Garantiza que el informe identifique unívocamente a cada artículo sin ambigüedades.
