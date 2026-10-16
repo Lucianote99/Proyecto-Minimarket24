@@ -54,7 +54,7 @@ HAVING -- Filtro condicional sobre el grupo
 
 `INNER JOIN detalle_venta dv ON p.id_producto = dv.id_producto`: Realiza una combinación interna entre `producto` (`p`) y `detalle_venta` (`dv`). La condición `ON` vincula la clave primaria `id_producto` del catálogo con la clave foránea `id_producto` de las líneas del comprobante, descartando productos que nunca hayan sido vendidos.
 
-`INNER JOIN venta v ON dv.id_venta = v.id_venta`: Realiza una segunda combinación interna conectando el detalle (`dv`) con la cabecera de la venta (`venta v`) a través de la clave común `id_venta`. Esto permite vincular ##3 tablas clave del modelo## y acceder a los atributos de estado y fecha de la transacción.
+`INNER JOIN venta v ON dv.id_venta = v.id_venta`: Realiza una segunda combinación interna conectando el detalle (`dv`) con la cabecera de la venta (`venta v`) a través de la clave común `id_venta`. Esto permite vincular **3 tablas clave del modelo** y acceder a los atributos de estado y fecha de la transacción.
 
 #### Bloque 3: Filtrado de Registros por Integridad (`WHERE`)
 `WHERE v.estado = 'completada'`: Filtra las filas a nivel de registro antes de realizar cualquier agrupación de datos. Garantiza que solo se tomen en cuenta los renglones asociados a comprobantes con estado `'completada'`, evitando que ventas canceladas o devueltas distorsionen los totales.
@@ -62,10 +62,10 @@ HAVING -- Filtro condicional sobre el grupo
 #### Bloque 4: Agrupamiento de Métricas (`GROUP BY`)
 `GROUP BY p.id_producto, p.nombre`: Colapsa y agrupa todas las filas individuales de los detalles de venta en un único registro por cada producto.
 
-Justificación del estándar SQL ANSI: Toda columna presente en la cláusula `SELECT` que no esté contenida dentro de una función de agregación (en este caso, `p.id_producto` y `p.nombre`) ##debe figurar de manera obligatoria## en el `GROUP BY`.
+Justificación del estándar SQL ANSI: Toda columna presente en la cláusula `SELECT` que no esté contenida dentro de una función de agregación (en este caso, `p.id_producto` y `p.nombre`) **debe figurar de manera obligatoria** en el `GROUP BY`.
 
 #### Bloque 5: Filtro Condicional sobre Agrupamientos y Subconsulta Dinámica (`HAVING`)
-`HAVING SUM(dv.cantidad) >`: Aplica una condición de filtrado ## posterior al agrupamiento ##. Evalúa si la suma total de unidades vendidas de un producto es estrictamente mayor que el límite calculated por la subconsulta anidada. Se utiliza `HAVING` y no `WHERE` debido a que la condición opera sobre el resultado acumulado de la función `SUM()`.
+`HAVING SUM(dv.cantidad) >`: Aplica una condición de filtrado **posterior al agrupamiento**. Evalúa si la suma total de unidades vendidas de un producto es estrictamente mayor que el límite calculated por la subconsulta anidada. Se utiliza `HAVING` y no `WHERE` debido a que la condición opera sobre el resultado acumulado de la función `SUM()`.
 
 ### Análisis de la Subconsulta Interna (Tabla Derivada `sub`):
 `SELECT SUM(dv2.cantidad) AS total_prod ... GROUP BY dv2.id_producto`: Esta consulta interna calcula de forma independiente la suma total de unidades vendidas para cada producto del sistema (usando los alias secundarios `dv2` y `v2` para no interferir con la consulta externa).
