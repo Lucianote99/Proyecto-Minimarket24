@@ -65,7 +65,7 @@ HAVING -- Filtro condicional sobre el grupo
 Justificación del estándar SQL ANSI: Toda columna presente en la cláusula `SELECT` que no esté contenida dentro de una función de agregación (en este caso, `p.id_producto` y `p.nombre`) ##debe figurar de manera obligatoria## en el `GROUP BY`.
 
 #### Bloque 5: Filtro Condicional sobre Agrupamientos y Subconsulta Dinámica (`HAVING`)
-`HAVING SUM(dv.cantidad) >`: Aplica una condición de filtrado ##posterior al agrupamiento##. Evalúa si la suma total de unidades vendidas de un producto es estrictamente mayor que el límite calculated por la subconsulta anidada. Se utiliza `HAVING` y no `WHERE` debido a que la condición opera sobre el resultado acumulado de la función `SUM()`.
+`HAVING SUM(dv.cantidad) >`: Aplica una condición de filtrado ## posterior al agrupamiento ##. Evalúa si la suma total de unidades vendidas de un producto es estrictamente mayor que el límite calculated por la subconsulta anidada. Se utiliza `HAVING` y no `WHERE` debido a que la condición opera sobre el resultado acumulado de la función `SUM()`.
 
 ### Análisis de la Subconsulta Interna (Tabla Derivada `sub`):
 `SELECT SUM(dv2.cantidad) AS total_prod ... GROUP BY dv2.id_producto`: Esta consulta interna calcula de forma independiente la suma total de unidades vendidas para cada producto del sistema (usando los alias secundarios `dv2` y `v2` para no interferir con la consulta externa).
