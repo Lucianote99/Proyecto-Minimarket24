@@ -36,7 +36,7 @@ HAVING -- Filtro condicional sobre el grupo
             GROUP BY dv2.id_producto
         ) AS sub
     );
-
+```
 ###Explicación Detallada Línea por Línea
 
 ##Bloque 1: Proyección de Columnas (`SELECT`)
