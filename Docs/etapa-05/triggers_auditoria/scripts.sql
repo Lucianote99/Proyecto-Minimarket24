@@ -119,7 +119,7 @@ SELECT * FROM dbo.auditoria_producto;
 SELECT * FROM dbo.auditoria_stock;
 
 -- PASO 5: Ver el estado final de las tablas operativas
-SELECT p.id_producto, p.nombre, p.precio_actual, s.cantidad AS stock_actual
+SELECT p.id_producto, p.nombre, p.precio_actual, s.id_stock, s.cantidad AS stock_actual
 FROM dbo.producto p
 INNER JOIN dbo.stock s ON s.id_producto = p.id_producto
 WHERE p.id_producto = 1;
