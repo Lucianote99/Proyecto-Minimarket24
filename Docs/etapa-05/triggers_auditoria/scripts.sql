@@ -1,5 +1,5 @@
 -- =====================================================================
--- ETAPA V: Triggers y Auditoría - Minimarket-24 (Arquitectura Desacoplada)
+-- ETAPA V: Triggers y Auditoría - Minimarket-24 
 -- Archivo: scripts.sql
 -- =====================================================================
 
