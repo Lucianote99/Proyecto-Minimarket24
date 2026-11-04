@@ -1,4 +1,4 @@
-# ⚡ Justificación de Optimización Lógica e Índices - Minimarket-24
+# Justificación de Optimización Lógica e Índices - Minimarket-24
 
 Este documento analiza la estrategia de **optimización de rendimiento** aplicada a la base de datos del proyecto **Minimarket-24**, demostrando el cumplimiento de las buenas prácticas de filtrado temprano (*Pushing Down Predicates*) e indexación física para soportar un entorno operativo 24/7 de alta concurrencia.
 
