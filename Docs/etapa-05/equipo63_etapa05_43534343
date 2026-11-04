@@ -1,0 +1,47 @@
+# Manifiesto Individual - Etapa V: Triggers y Auditoría
+
+* **Proyecto:** Sistema de Ventas (Minimarket-24)
+* **Integrante:** Bernardy Santiago Ezequiel
+* **DNI:** 43534343
+* **Grupo / Equipo:** Equipo 63
+
+---
+
+## Resumen del Trabajo Realizado
+
+En esta etapa implementé el módulo de auditoría y trazabilidad del sistema *Minimarket-24* utilizando disparadores (*triggers*) del lado del servidor SQL Server. El objetivo principal fue registrar de forma automatizada las alteraciones e incidencias sobre datos críticos sin afectar la operación cotidiana.
+
+---
+
+## Estructura y Organización de Archivos
+
+A continuación se detalla la estructura de carpetas y archivos entregados para esta etapa:
+
+```text
+triggers_auditoria/
+├── evidencias/
+│   └── captura_auditoria.png
+├── investigacion.md
+└── scripts.sql
+```
+
+---
+
+## Detalle de los Entregables
+
+### Scripts de Base de Datos (`scripts.sql`)
+* **Creación de Triggers:** Programación de disparadores `AFTER UPDATE` sobre las tablas operativas para auditar cambios en precios y movimientos de stock.
+* **Manejo de Tablas Virtuales:** Uso de las pseudotablas `INSERTED` y `DELETED` para contrastar los valores anteriores y nuevos.
+* **Poblado de Tablas Históricas:** Inserción automática hacia las tablas de auditoría guardando el valor anterior, el nuevo valor, la fecha/hora y el usuario responsable de la modificación.
+
+### Documentación e Investigación (`investigacion.md`)
+* Análisis conceptual sobre el funcionamiento de triggers, casos de uso recomendados en bases de datos relacionales y buenas prácticas para evitar sobrecostos de rendimiento (*overhead*) en transacciones concurrentes.
+
+### Evidencias de Ejecución (`evidencias/captura_auditoria.png`)
+* Capturas de pantalla que demuestran la prueba de ejecución mediante sentencias `UPDATE` de prueba y la posterior consulta a la tabla de auditoría verificando el correcto registro inmutable del evento.
+
+---
+
+## Conclusión
+
+La solución entregada permite mantener una trazabilidad transparente y confiable sobre el historial de datos sensibles del comercio, cumpliendo con los requerimientos técnicos y funcionales planteados para la Etapa V.
