@@ -1,0 +1,43 @@
+# Contribución individual -- Etapa 05
+**Equipo:** 63
+**Integrante:** Erck Luciano Andrés
+**Fecha:** 2026-10-25
+
+## 1. Aporte realizado
+Describir brevemente las actividades realizadas durante esta etapa.
+- Durante la etapa 5 estuve a cargo de la investigación, desarrollo y prueba de dos temas técnicos obligatorios sobre nuestra base de 
+datos Minimarket_24: los Procedimientos y Funciones Almacenadas, y la implementación de Seguridad mediante Roles (RBAC).
+- Desarrollé los scripts de creación de funciones de cálculo (descuentos y validación de stock), un procedimiento almacenado integral 
+para registrar ventas completas, y todo el esquema de usuarios, roles (cajero, repositor, administrador) y permisos (GRANT/DENY).
+
+## 2. Decisiones en las que participé
+Indicar decisiones relacionadas con el dominio, alcance o reglas de negocio.
+- Tomé la decisión de escalar las reglas de negocio para los descuentos a valores reales de nuestro lote de datos (ej: 10% de descuento superando los $5000), para que la 
+función se pueda evidenciar correctamente en la demostración.
+- Decidí implementar el principio de menor privilegio en la seguridad, bloqueando el UPDATE y DELETE manual en las tablas para el cajero, y forzando
+a que las ventas se hagan exclusivamente a través del procedimiento almacenado (encapsulamiento).
+
+## 3. Problemas o dificultades identificadas
+Describir dificultades encontradas durante el desarrollo.
+- Tuve problemas importantes de sintaxis inicial debido a la versión de nuestro motor (SQL Server 10.50 / 2008 R2). Instrucciones modernas como `CREATE OR ALTER` o `THROW` no estaban soportadas.
+- Me encontré con falsos positivos del IntelliSense de SQL Server Management Studio (subrayados rojos de error en funciones que sí existían), lo que me hizo dudar de si la sintaxis estaba bien.
+- Entender cómo hacer pruebas de seguridad sin tener que cerrar sesión en el servidor y crear logins complejos.
+
+## 4. Soluciones o propuestas realizadas
+Explicar brevemente cómo se resolvieron o propusieron resolver las dificultades.
+- Para solucionar los errores de versión, reemplacé `CREATE OR ALTER` por los clásicos verificadores `IF OBJECT_ID(...) DROP...` y utilicé `RAISERROR` en lugar de `THROW` para frenar
+la ejecución cuando no hay stock.
+- Aprendí a actualizar la caché local del editor (`Ctrl + Shift + R`) para limpiar los falsos errores del IntelliSense.
+- Para las pruebas de seguridad, utilicé la creación de usuarios `WITHOUT LOGIN` y el comando `EXECUTE AS USER`, lo que me permitió simular ser el cajero 
+o el repositor dentro de la misma consulta sin tener que configurar contraseñas a nivel servidor.
+
+## 5. Evidencias en el repositorio
+Indicar los archivos, commits, issues o pull requests relacionados con el aporte.
+
+## 6. Reflexión individual
+¿Qué concepto o competencia de Bases de Datos I considero que desarrollé en esta etapa?
+- Principalmente el concepto de mover la lógica de programación y la seguridad directamente al motor de la base de datos. Hasta ahora veníamos viendo a SQL solo como un lugar para 
+guardar y consultar tablas (como hice en las etapas 3 y 4 con la carga de datos y los JOINs). 
+- Con los procedimientos y la seguridad, aprendí que la base de datos se puede "defender sola": aunque alguien tenga acceso al Management Studio, si no 
+tiene el rol adecuado, el motor le frena un UPDATE o un DELETE. Entender cómo se encapsula la lógica en un procedimiento y se le da permiso de ejecución al cajero (sin darle permisos 
+a las tablas base) me ayudó a comprender cómo funciona la arquitectura de seguridad en un sistema real.
